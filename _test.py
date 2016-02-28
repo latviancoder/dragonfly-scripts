@@ -30,7 +30,7 @@ example_rule = MappingRule(
         "rename": Key("s-f6"),
         "termi": Key("a-f12"),
         "version control": Key("a-f10"),
-        "accept choice": Key("c-enter"),
+        "accept choice": Key("control:down/3") + Key("enter") + Key("control:up"),
 
         "[go] to line": Key("c-g"),
         "[go] to line <n>": Key("c-g") + Pause("20") + Text("%(n)d") + Key("enter, end"),
