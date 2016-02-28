@@ -280,6 +280,7 @@ abbreviationMap = {
     "button": "btn",
     "class": "cls",
     "command": "cmd",
+    "com": "com",
     "(config|configuration)": "cfg",
     "context": "ctx",
     "control": "ctrl",
