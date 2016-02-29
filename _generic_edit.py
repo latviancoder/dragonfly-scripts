@@ -53,6 +53,7 @@ from lib.format import (
     uppercase_count,
     lowercase_count,
     format_text,
+    camel_case_text,
     FormatTypes as ft,
 )
 
@@ -123,6 +124,7 @@ specialCharMap = {
     "dollar": "$",
     "carrot": "^",
     "arrow": "->",
+    "(and|end)": "end",
     "fat arrow": "=>",
     "dub coal": "::",
     "amper": "&",
@@ -135,13 +137,12 @@ specialCharMap = {
 
     "(bar|vertical bar|pipe)": "|",
     "(dot|period)": ".",
-    "comma": ",",
+    "sink": ",",
     "(star|asterisk)": "*",
     "colon": ":",
     "(semicolon|semi-colon)": ";",
     "at": "@",
     "percent": "%",
-    "and": "&",
     "equal": "=",
     "space": " "
 }
@@ -163,33 +164,35 @@ singleModifierMap = {
 }
 
 letterMap = {
-    "(A|alpha)": "a",
-    "(B|bravo) ": "b",
-    "(C|charlie) ": "c",
-    "(D|delta) ": "d",
-    "(E|echo) ": "e",
-    "(F|foxtrot) ": "f",
-    "(G|golf) ": "g",
-    "(H|hotel) ": "h",
-    "(I|india|indigo) ": "i",
-    "(J|juliet) ": "j",
-    "(K|kilo) ": "k",
-    "(L|lima) ": "l",
-    "(M|mike) ": "m",
-    "(N|november) ": "n",
-    "(O|oscar) ": "o",
-    "(P|papa|poppa) ": "p",
-    "(Q|quebec|quiche) ": "q",
-    "(R|romeo) ": "r",
-    "(S|sierra) ": "s",
-    "(T|tango) ": "t",
-    "(U|uniform) ": "u",
-    "(V|victor) ": "v",
-    "(W|whiskey) ": "w",
-    "(X|x-ray) ": "x",
-    "(Y|yankee) ": "y",
-    "(Z|zulu) ": "z",
+    "(alpha)": "a",
+    "(bravo) ": "b",
+    "(charlie) ": "c",
+    "(delta) ": "d",
+    "(echo) ": "e",
+    "(foxtrot) ": "f",
+    "(golf) ": "g",
+    "(hotel) ": "h",
+    "(india|indigo) ": "i",
+    "(juliet) ": "j",
+    "(kilo) ": "k",
+    "(lima) ": "l",
+    "(mike) ": "m",
+    "(november) ": "n",
+    "(oscar) ": "o",
+    "(papa|poppa) ": "p",
+    "(quebec|quiche) ": "q",
+    "(romeo) ": "r",
+    "(sierra) ": "s",
+    "(tango) ": "t",
+    "(uniform) ": "u",
+    "(victor) ": "v",
+    "(whiskey) ": "w",
+    "(x-ray) ": "x",
+    "(yankee) ": "y",
+    "(zulu) ": "z",
 }
+
+specialCharMap.update(letterMap)
 
 numberMap = {
     "zero": "0",
@@ -203,6 +206,8 @@ numberMap = {
     "eight": "8",
     "nine": "9",
 }
+
+specialCharMap.update(numberMap)
 
 controlKeyMap = {
     "left": "left",
@@ -444,7 +449,7 @@ grammarCfg.cmd.map = Item(
         "enter [<n>]": release + Key("enter:%(n)d"),
         "tab [<n>]": Key("tab:%(n)d"),
         "delete [<n>]": Key("del/3:%(n)d"),
-        "delete [this] line": Key("home, s-end, del"),  # @IgnorePep8
+        "daily": Key("home, s-end, del"),  # @IgnorePep8
         "backspace [<n>]": release + Key("backspace:%(n)d"),
         "application key": release + Key("apps/3"),
         "win key": release + Key("win/3"),
@@ -452,8 +457,8 @@ grammarCfg.cmd.map = Item(
         "copy [that]": Function(copy_command),
         "cut [that]": release + Key("c-x/3"),
         "select all": release + Key("c-a/3"),
-        "undo": release + Key("c-z/3"),
-        "undo <n> [times]": release + Key("c-z/3:%(n)d"),
+        "icey": release + Key("c-z/3"),
+        "icey <n> [times]": release + Key("c-z/3:%(n)d"),
         "redo": release + Key("c-y/3"),
         "redo <n> [times]": release + Key("c-y/3:%(n)d"),
         "[(hold|press)] alt": Key("alt:down/3"),
@@ -480,7 +485,7 @@ grammarCfg.cmd.map = Item(
         "semi-colon [<n>]": Key("semicolon/2:%(n)d"),
         "comma [<n>]": Key("comma/2:%(n)d"),
         "(dot|period) [<n>]": Key("dot/2:%(n)d"),
-        "(dash|hyphen|minus) [<n>]": Key("hyphen/2:%(n)d"),
+        "(dash|minus) [<n>]": Key("hyphen/2:%(n)d"),
         "underscore [<n>]": Key("underscore/2:%(n)d"),
         # To release keyboard capture by VirtualBox.
         "press right control": Key("Control_R"),
@@ -517,6 +522,10 @@ grammarCfg.cmd.map = Item(
         "dragon rule": Text('dragonrule') + Key("tab"),
         "dragon text": Text('dragontext') + Key("tab"),
         "dragon key": Text('dragonkey') + Key("tab"),
+
+        "roshan": Key("c-semicolon/20, space"),
+        "dotmel <text>": Text('.') + Function(camel_case_text),
+
     },
     namespace={
         "Key": Key,
