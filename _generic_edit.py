@@ -26,7 +26,8 @@ from dragonfly import (
     CompoundRule,
     AppContext,
     Key,
-    Text
+    Text,
+    Mimic
 )
 import win32con
 from dragonfly.actions.keyboard import Typeable, keyboard
@@ -510,6 +511,12 @@ grammarCfg.cmd.map = Item(
         "[<text>] (go to sleep|cancel and sleep) [<text2>]": Function(cancel_and_sleep),  # @IgnorePep8
         # Reload Natlink.
         "reload Natlink": Function(reload_natlink),
+        "code mode": Mimic("\\no-caps-on") + Mimic("\\no-space-on"),
+
+        # create rules
+        "dragon rule": Text('dragonrule') + Key("tab"),
+        "dragon text": Text('dragontext') + Key("tab"),
+        "dragon key": Text('dragonkey') + Key("tab"),
     },
     namespace={
         "Key": Key,
@@ -521,7 +528,7 @@ grammarCfg.cmd.map.update({
     "press <modifierSingle>": Key("%(modifierSingle)s"),
     "press <modifier1> <pressKey> [<n>]": Key("%(modifier1)s-%(pressKey)s:%(n)d"),  # @IgnorePep8
     "press <modifier1> <modifier2> <pressKey> [<n>]": Key("%(modifier1)s%(modifier2)s-%(pressKey)s:%(n)d"),
-# @IgnorePep8
+    # @IgnorePep8
 })
 
 
