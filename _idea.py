@@ -64,6 +64,9 @@ example_rule = MappingRule(
         
         # Complete current code
         "fin": Key("control, shift, enter"),
+        
+        # Jump to navigation bar
+        "breadcrumb": Key("a-home"),
     },
     extras=[
         IntegerRef("n", 1, 10000),
