@@ -56,7 +56,21 @@ emmet = {
     "background repeat": "bgr",
     "background position": "bgp",
     "background size": "bgsz",
-    
+    "color": "c",
+    "opacity": "op",
+    "content": "cnt",
+    "outline": "ol",
+    "table layout": "tl",
+    "border": "bd+",
+    "border top": "bdt+",
+    "border bottom": "bdb+",
+    "border left ": "bdl+",
+    "border right": "bdr+",
+    "border collapse": "bdcl",
+    "border radious": "bdrs",
+    "list style": "lis",
+    "important": "!",
+    "font face": "@f+"
 }
 
 context = AppContext(title=".css")
@@ -70,6 +84,7 @@ rules = MappingRule(
         "<prop>": Text("%(prop)s") + Key("tab"),
         "<prop> <n>": Text("%(prop)s") + Text("%(n)d") + Key("tab"),
         "<n> pixel": Text("%(n)dpx"),
+        "<n> percent": Text("%(n)d%"),
         "(class|squeeze) <text>": Text(".") + Function(dashify_text) + Text(" {") + Key("enter"),
     },
     extras=[
