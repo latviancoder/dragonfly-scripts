@@ -57,6 +57,8 @@ example_rule = MappingRule(
 
         "race": Key("alt:down/3") + Key("s-right") + Key("alt:up"),
         "race <n>": Key("alt:down/3") + Key("s-right:%(n)d") + Key("alt:up"),
+        
+        "fin": Key("control, shift, enter"),
     },
     extras=[
         IntegerRef("n", 1, 100),
