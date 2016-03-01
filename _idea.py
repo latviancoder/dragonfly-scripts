@@ -58,10 +58,15 @@ example_rule = MappingRule(
         "race": Key("alt:down/3") + Key("s-right") + Key("alt:up"),
         "race <n>": Key("alt:down/3") + Key("s-right:%(n)d") + Key("alt:up"),
         
+        # Go to beginning/end of parent block
+        "lap": Key("c-lbracket"),
+        "rap": Key("c-rbracket"),
+        
+        # Complete current code
         "fin": Key("control, shift, enter"),
     },
     extras=[
-        IntegerRef("n", 1, 100),
+        IntegerRef("n", 1, 10000),
         Dictation("text")
     ])
 
