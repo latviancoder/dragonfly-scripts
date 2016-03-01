@@ -13,15 +13,12 @@ grammar = Grammar("idea", context=ideaContext)
 example_rule = MappingRule(
     name="example",  # The name of the rule.
     mapping={
-        "git": Text("git"),
-        "npm": Text("npm"),
         "joke": Text('$('),
-        "softy": Key('s-enter'),
-        "tweet": Key('a-up'),
-        "tweet <n>": Key("alt:down/3") + Key("up:%(n)d") + Key("alt:up"),
+
         "dub": Key("a-d"),
         "dub <n>": Key("alt:down/3") + Key("d:%(n)d") + Key("alt:up"),
         "next word": Key("a-g"),
+        "next word <n>": Key("alt:down/3") + Key("g:%(n)d") + Key("alt:up"),
 
         "save all": Key("a-s"),
         "arch": Key("a-n"),
@@ -41,32 +38,23 @@ example_rule = MappingRule(
         "prev place": Key("alt:down/3") + Key("s-backspace") + Key("alt:up"),
         "next place": Key("alt:down/3") + Key("s-end") + Key("alt:up"),
 
-        "search file": Key("shift, shift"),
+        "seeker": Key("shift, shift"),
         "find in file": Key("a-f"),
         "close file": Key("a-w"),
         "reformat": Key("control:down/3") + Key("a-l") + Key("control:up"),
 
-        "lamp": Key("a-left"),
-        "lamp <n>": Key("alt:down/3") + Key("left:%(n)d") + Key("alt:up"),
-
-        "ramp": Key("a-right"),
-        "ramp <n>": Key("alt:down/3") + Key("right:%(n)d") + Key("alt:up"),
-
-        "lace": Key("alt:down/3") + Key("s-left") + Key("alt:up"),
-        "lace <n>": Key("alt:down/3") + Key("s-left:%(n)d") + Key("alt:up"),
-
-        "race": Key("alt:down/3") + Key("s-right") + Key("alt:up"),
-        "race <n>": Key("alt:down/3") + Key("s-right:%(n)d") + Key("alt:up"),
-        
         # Go to beginning/end of parent block
         "lap": Key("c-lbracket"),
         "rap": Key("c-rbracket"),
-        
+
         # Complete current code
-        "fin": Key("control, shift, enter"),
-        
+        "fin": Key("control:down/3, shift:down/3, enter, shift:up, control:up"),
+
         # Jump to navigation bar
         "breadcrumb": Key("a-home"),
+
+        "suggest": Key("c-space"),
+        "[go] to tab <n>": Key("control:down/3, alt:down/3") + Key("%(n)d") + Key("control:up, alt:up"),
     },
     extras=[
         IntegerRef("n", 1, 10000),
