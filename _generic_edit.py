@@ -542,8 +542,6 @@ grammarCfg.cmd.map = Item(
 		"dragon text": Text('dragontext') + Key("tab"),
 		"dragon key": Text('dragonkey') + Key("tab"),
 
-		"roshan": Key("c-semicolon/20, space"),
-
 		"dockmel <text>": Text('.') + Function(camel_case_text),
 
 		"softy": Key('s-enter'),
