@@ -24,10 +24,10 @@ example_rule = MappingRule(
         "arch": Key("a-n"),
         "project bar": Key("a-1"),
         "rename": Key("s-f6"),
-        "termi": Key("a-f12"),
+        "termi": Key("a-t"),
         "version control": Key("a-f10"),
         "version pull": Key("a-f10"),
-
+        
         "[go] to line": Key("c-g"),
         "[go] to line <n>": Key("c-g") + Pause("20") + Text("%(n)d") + Key("enter, end"),
 
@@ -38,23 +38,28 @@ example_rule = MappingRule(
         "prev place": Key("alt:down/3") + Key("s-backspace") + Key("alt:up"),
         "next place": Key("alt:down/3") + Key("s-end") + Key("alt:up"),
 
-        "seeker": Key("shift, shift"),
         "find in file": Key("a-f"),
         "close file": Key("a-w"),
+      
+        # Search everywhere
+        "seeker": Key("shift, shift"),
+        # Reformat code
         "reformat": Key("control:down/3") + Key("a-l") + Key("control:up"),
-
         # Go to beginning/end of parent block
         "lap": Key("c-lbracket"),
         "rap": Key("c-rbracket"),
-
         # Complete current code
         "fin": Key("control:down/3, shift:down/3, enter, shift:up, control:up"),
-
         # Jump to navigation bar
         "breadcrumb": Key("a-home"),
-
+        # Autocomplete
         "suggest": Key("c-space"),
+        # Go to specific tab (using GoToTabs) plugin 
         "[go] to tab <n>": Key("control:down/3, alt:down/3") + Key("%(n)d") + Key("control:up, alt:up"),
+        # Ace Jump plugin
+        "roshan": Key("c-semicolon/20, space"),
+        # Surround with live template
+        "surround": Key("control:down/3, alt:down/3, j, alt:up, control:up"),
     },
     extras=[
         IntegerRef("n", 1, 10000),
