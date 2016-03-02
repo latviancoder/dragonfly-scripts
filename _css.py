@@ -67,13 +67,16 @@ emmet = {
     "border left ": "bdl+",
     "border right": "bdr+",
     "border collapse": "bdcl",
-    "border radious": "bdrs",
+    "border radius": "bdrs",
     "list style": "lis",
     "important": "!",
     "font face": "@f+"
 }
 
-context = AppContext(title=".css")
+contextCss = AppContext(title=".css")
+contextLess = AppContext(title=".less")
+context = contextCss | contextLess
+
 grammar = Grammar("css", context=context)
 
 rules = MappingRule(
