@@ -78,7 +78,8 @@ grammar = Grammar("html", context=context)
 rules = MappingRule(
     name="html",
     mapping={
-        "<element>": Text("%(element)s") + Key("tab"),
+        "<element>": Text("%(element)s"),
+        "el <element>": Text("%(element)s") + Key("tab"),
         "(class|squeeze) <text>": Text(".") + Function(dashify_text) + Key("tab"),
     },
     extras=[
