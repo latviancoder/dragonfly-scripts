@@ -544,7 +544,7 @@ grammarCfg.cmd.map = Item(
 
 		"roshan": Key("c-semicolon/20, space"),
 
-		"dotmel <text>": Text('.') + Function(camel_case_text),
+		"dockmel <text>": Text('.') + Function(camel_case_text),
 
 		"softy": Key('s-enter'),
 		"tweet": Key('a-up'),
