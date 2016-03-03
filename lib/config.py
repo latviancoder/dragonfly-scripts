@@ -77,6 +77,3 @@ def init_default_values():
 def get_config():
     global CONFIG
     return CONFIG
-
-
-load_config()
