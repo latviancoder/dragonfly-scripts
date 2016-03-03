@@ -21,18 +21,25 @@ example_rule = MappingRule(
         "next word <n>": Key("alt:down/3") + Key("g:%(n)d") + Key("alt:up"),
 
         "save all": Key("a-s"),
+
         "arch": Key("a-n"),
+        "arch file": Key("a-n") + Pause('5') + Key('enter'),
+        "arch dir": Key("a-n") + Pause('5') + Key('down, enter'),
+
         "project bar": Key("a-1"),
         "rename": Key("s-f6"),
         "termi": Key("a-t"),
         "version control": Key("a-f10"),
         "version pull": Key("a-f10"),
-        
+
         "[go] to line": Key("c-g"),
         "[go] to line <n>": Key("c-g") + Pause("20") + Text("%(n)d") + Key("enter, end"),
-
+        # move line down/up
         "hamster down": Key("alt:down/3") + Key("s-down") + Key("alt:up"),
         "hamster up": Key("alt:down/3") + Key("s-up") + Key("alt:up"),
+        # move statement down/up
+        "tiger up": Key("control:down/3") + Key("s-up") + Key("control:up"),
+        "tiger down": Key("control:down/3") + Key("s-down") + Key("control:up"),
 
         "prev file": Key("control:down/3") + Key("tab") + Key("control:up"),
         "prev place": Key("alt:down/3") + Key("s-backspace") + Key("alt:up"),
@@ -40,7 +47,7 @@ example_rule = MappingRule(
 
         "find in file": Key("a-f"),
         "close file": Key("a-w"),
-      
+
         # Search everywhere
         "seeker": Key("shift, shift"),
         # Reformat code
@@ -54,7 +61,7 @@ example_rule = MappingRule(
         "breadcrumb": Key("a-home"),
         # Autocomplete
         "suggest": Key("c-space"),
-        # Go to specific tab (using GoToTabs) plugin 
+        # Go to specific tab (using GoToTabs) plugin
         "[go] to tab <n>": Key("control:down/3, alt:down/3") + Key("%(n)d") + Key("control:up, alt:up"),
         # Ace Jump plugin
         "roshan": Key("c-semicolon/20, space"),

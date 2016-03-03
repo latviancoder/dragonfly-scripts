@@ -190,14 +190,7 @@ letterMap = {
 	"(zulu) ": "z"
 }
 
-wordMap = {
-	"git": "git",
-	"npm": "npm",
-	"very": "var"
-}
-
 specialCharMap.update(letterMap)
-specialCharMap.update(wordMap)
 
 numberMap = {
 	"zero": "0",
@@ -365,6 +358,8 @@ abbreviationMap = {
 # Other words that won't work for one reason or another, can also be added to
 # this list.
 reservedWord = {
+	"lava": 'lava',
+	"raven": 'raven',
 	"up": "up",
 	"down": "down",
 	"left": "left",
@@ -460,8 +455,8 @@ grammarCfg.cmd.map = Item(
 		"race": Key("control:down/3") + Key("s-right") + Key("control:up"),
 		"race <n>": Key("control:down/3") + Key("s-right:%(n)d") + Key("control:up"),
 
-		"lava": Key("s-home") + Key("delete"),
-		"raven": Key("s-end") + Key("delete"),
+		"lava": Key("s-home"),
+		"raven": Key("s-end"),
 
 		# Functional keys.
 		"space": release + Key("space"),
