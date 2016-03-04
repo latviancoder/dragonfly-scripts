@@ -104,6 +104,7 @@ specialCharMap = {
 	"less equals": " <= ",
 	"dot": ".",
 	"leap": "(",
+	"liquid": "('",
 	"reap": ")",
 	"lake": "{",
 	"rake": "}",
@@ -162,11 +163,11 @@ singleModifierMap = {
 }
 
 letterMap = {
-	"(alpha)": "a",
+	"(Andrey)": "a",
 	"(bravo) ": "b",
 	"(charlie) ": "c",
 	"(delta) ": "d",
-	"(echo) ": "e",
+	"Yevgeny": "e",
 	"(foxtrot) ": "f",
 	"(game) ": "g",
 	"(hotel) ": "h",
@@ -249,7 +250,7 @@ formatMap = {
 	"uppercase": ft.upperCase,
 	"lowercase": ft.lowerCase,
 	"squash": ft.squash,
-	"lowercase squash": [ft.squash, ft.lowerCase],
+	"loswosh": [ft.squash, ft.lowerCase],
 	"uppercase squash": [ft.squash, ft.upperCase],
 	"squash lowercase": [ft.squash, ft.lowerCase],
 	"squash uppercase": [ft.squash, ft.upperCase],
@@ -542,6 +543,8 @@ grammarCfg.cmd.map = Item(
 		"softy": Key('s-enter'),
 		"tweet": Key('a-up'),
 		"tweet <n>": Key("alt:down/3") + Key("up:%(n)d") + Key("alt:up"),
+
+
 	},
 	namespace={
 		"Key": Key,
