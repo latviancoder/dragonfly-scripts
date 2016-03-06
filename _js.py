@@ -16,6 +16,7 @@ rules = MappingRule(
 		'dom div': Text('<div></') + Key('left/1:6'),
 		"selector <text>": Text('$(\'.') + Function(dashify_text),
 		"protected <text>": Text("_") + Function(camel_case_text),
+		"joke": Text('$('),
 	},
 	extras=[
 		Dictation("text"),

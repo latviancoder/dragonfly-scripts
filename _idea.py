@@ -17,14 +17,10 @@ example_rule = MappingRule(
 		'gundam restart': Key('c-f5'),
 		'gundam tool': Key('a-4'),
 
-		"joke": Text('$('),
-
 		"dub": Key("a-d"),
 		"dub <n>": Key("alt:down/3") + Key("d:%(n)d") + Key("alt:up"),
 		"next word": Key("a-g"),
 		"next word <n>": Key("alt:down/3") + Key("g:%(n)d") + Key("alt:up"),
-
-		"save all": Key("a-s"),
 
 		"arch": Key("a-n"),
 		"arch file": Key("a-n") + Pause('5') + Key('enter'),

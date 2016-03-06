@@ -64,7 +64,7 @@ release = Key("shift:up, ctrl:up, alt:up")
 
 
 def reload_rules(text=None, text2=None):
-	Key("a-s").execute()
+	Key("c-s").execute()
 	setMicState("sleeping")
 	setMicState("on")
 
