@@ -8,6 +8,5 @@ This is based on other repositories.
 
 Webstorm plugins:
 * https://plugins.jetbrains.com/plugin/7086 
-* https://plugins.jetbrains.com/plugin/4657 
 * https://plugins.jetbrains.com/plugin/201 
 * https://plugins.jetbrains.com/plugin/7784 
