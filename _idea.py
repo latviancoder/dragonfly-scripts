@@ -34,7 +34,7 @@ example_rule = MappingRule(
 		"rename": Key("s-f6"),
 		"termi": Key("a-t"),
 		"version control": Key("a-f10"),
-		"version pull": Key("a-f10"),
+		"version pull": Key("control:down/3, alt:down/3, rbracket, control:up, alt:up"),
 
 		"[go] to line": Key("c-g"),
 		"[go] to line <n>": Key("c-g") + Pause("20") + Text("%(n)d") + Key("enter, end"),

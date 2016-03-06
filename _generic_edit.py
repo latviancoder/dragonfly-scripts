@@ -8,6 +8,7 @@ Licensed under the LGPL, see http://www.gnu.org/licenses/
 """
 from natlink import setMicState
 from dragonfly import (
+	ActionBase,
 	Choice,
 	Pause,
 	Window,
@@ -31,6 +32,7 @@ from dragonfly import (
 	BringApp
 )
 import win32con
+import os
 from dragonfly.actions.keyboard import Typeable, keyboard
 from dragonfly.actions.typeables import typeables
 
@@ -61,31 +63,10 @@ from lib.format import (
 release = Key("shift:up, ctrl:up, alt:up")
 
 
-def cancel_and_sleep(text=None, text2=None):
-	"""Used to cancel an ongoing dictation and puts microphone to sleep.
-
-	This method notifies the user that the dictation was in fact canceled,
-	with a sound and a message in the Natlink feedback window.
-	Then the the microphone is put to sleep.
-	Example:
-	"'random mumbling go to sleep'" => Microphone sleep.
-
-	"""
-	print("* Dictation canceled. Going to sleep. *")
-	sound.play(sound.SND_DING)
+def reload_rules(text=None, text2=None):
+	Key("a-s").execute()
 	setMicState("sleeping")
-
-
-def reload_natlink():
-	"""Reloads Natlink and custom Python modules."""
-	win = Window.get_foreground()
-	FocusWindow(executable="natspeak",
-	            title="Messages from Python Macros").execute()
-	Pause("10").execute()
-	Key("a-f, r").execute()
-	Pause("10").execute()
-	win.set_foreground()
-
+	setMicState("on")
 
 # For repeating of characters.
 specialCharMap = {
@@ -106,14 +87,11 @@ specialCharMap = {
 	"leap": "(",
 	"liquid": "('",
 	"reap": ")",
-	"lake": "{",
-	"rake": "}",
-	"lobe": "[",
-	"robe": "]",
 	"luke": "<",
 	"dub luke": " << ",
 	"ruke": ">",
 	"(quote|quick)": "'",
+	"tick": "`",
 	"dash": "-",
 	"semi": ";",
 	"bang": "!",
@@ -125,7 +103,6 @@ specialCharMap = {
 	"sick quote": "'",
 	"dollar": "$",
 	"carrot": "^",
-	"arrow": "->",
 	"fat arrow": "=>",
 	"dub coal": "::",
 	"amper": "&",
@@ -167,7 +144,7 @@ letterMap = {
 	"(bravo) ": "b",
 	"(charlie) ": "c",
 	"(delta) ": "d",
-	"Yevgeny": "e",
+	"eclipse": "e",
 	"(foxtrot) ": "f",
 	"(game) ": "g",
 	"(hotel) ": "h",
@@ -431,8 +408,8 @@ grammarCfg.cmd.map = Item(
 		"left [<n>] slow": Key("left/15:%(n)d"),
 		"right [<n>]": Key("right:%(n)d"),
 		"right [<n>] slow": Key("right/15:%(n)d"),
-		"page up [<n>]": Key("pgup:%(n)d"),
-		"page down [<n>]": Key("pgdown:%(n)d"),
+		"jump up [<n>]": Key("pgup:%(n)d"),
+		"jump down [<n>]": Key("pgdown:%(n)d"),
 		"up <n> (page|pages)": Key("pgup:%(n)d"),
 		"down <n> (page|pages)": Key("pgdown:%(n)d"),
 		"left <n> (word|words)": Key("c-left/3:%(n)d/10"),
@@ -528,9 +505,7 @@ grammarCfg.cmd.map = Item(
 		"(delete|remove) (double|extra) (space|whitespace)": Key("c-left/3, backspace, c-right/3"),  # @IgnorePep8
 		"(delete|remove) (double|extra) (type|char|character)": Key("c-left/3, del, c-right/3"),  # @IgnorePep8
 		# Microphone sleep/cancel started dictation.
-		"[<text>] (go to sleep|cancel and sleep) [<text2>]": Function(cancel_and_sleep),  # @IgnorePep8
-		# Reload Natlink.
-		"reload Natlink": Function(reload_natlink),
+		"clinkz": Function(reload_rules),  # @IgnorePep8
 		"code mode": Mimic("\\no-caps-on") + Mimic("\\no-space-on"),
 
 		# create rules
@@ -539,12 +514,22 @@ grammarCfg.cmd.map = Item(
 		"dragon key": Text('dragonkey') + Key("tab"),
 
 		"dockmel <text>": Text('.') + Function(camel_case_text),
+		"libra": Text("() {}") + Key('left, enter'),
 
 		"softy": Key('s-enter'),
 		"tweet": Key('a-up'),
 		"tweet <n>": Key("alt:down/3") + Key("up:%(n)d") + Key("alt:up"),
 
-
+		'switch apps': Key('alt:down, tab/20, alt:up'),
+		'pro one': Key('w-1'),
+		'pro two': Key('w-2'),
+		'pro three': Key('w-3'),
+		'pro four': Key('w-4'),
+		'pro five': Key('w-5'),
+		'pro six': Key('w-6'),
+		'pro seven': Key('w-7'),
+		'pro eight': Key('w-8'),
+		'pro nine': Key('w-9'),
 	},
 	namespace={
 		"Key": Key,
@@ -610,7 +595,24 @@ class RepeatRule(CompoundRule):
 
 grammar = Grammar("Generic edit")
 grammar.add_rule(RepeatRule())  # Add the top-level rule.
+
+
+class SwitchApplicationsRule(CompoundRule):
+	spec = "muzzle"
+
+	def _process_recognition(self, node, extras):
+		os.system('"C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\switcher.lnk"')
+		Pause("150").execute()
+		Key("right/100").execute()
+		Key("enter").execute()
+
+
+apple = SwitchApplicationsRule()
+
+grammar.add_rule(apple)
 grammar.load()  # Load the grammar.
+
+apple.enable()
 
 
 def unload():
