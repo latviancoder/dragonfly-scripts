@@ -516,11 +516,6 @@ grammarCfg.cmd.map = Item(
 		"dockmel <text>": Text('.') + Function(camel_case_text),
 		"libra": Text("() {}") + Key('left, enter'),
 
-		"softy": Key('s-enter'),
-		"tweet": Key('a-up'),
-		"tweet <n>": Key("alt:down/3") + Key("up:%(n)d") + Key("alt:up"),
-
-		'switch apps': Key('alt:down, tab/20, alt:up'),
 		'pro one': Key('w-1'),
 		'pro two': Key('w-2'),
 		'pro three': Key('w-3'),

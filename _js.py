@@ -4,26 +4,32 @@ from lib.format import (
 	dashify_text
 )
 
-contextJs = AppContext(title=".js")
+contextJs = AppContext(title='.js')
 context = contextJs
 
-grammar = Grammar("js", context=context)
+grammar = Grammar('js', context=context)
 
 rules = MappingRule(
-	name="js",
+	name='js',
 	mapping={
-		"fun": Text("f") + Key('tab'),
+		# jQuery selectors
+		'joke': Text('$('),
+		'selector <text>': Text('$(\'.') + Function(dashify_text),
+		# Arrow function
+		'fun': Text('f') + Key('tab'),
+		# Creating div elements inside of strings
 		'dom div': Text('<div></') + Key('left/1:6'),
-		"selector <text>": Text('$(\'.') + Function(dashify_text),
-		"protected <text>": Text("_") + Function(camel_case_text),
-		"joke": Text('$('),
+		# _myProtectedMethod
+		'protected <text>': Text('_') + Function(camel_case_text),
+		# __myPrivateMethod
+		'private <text>': Text('__') + Function(camel_case_text),
 	},
 	extras=[
-		Dictation("text"),
-		Integer("n", 0, 20000),
+		Dictation('text'),
+		Integer('n', 0, 20000),
 	],
 	defaults={
-		"n": 1
+		'n': 1
 	}
 )
 
